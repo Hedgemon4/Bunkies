@@ -4,4 +4,9 @@
     <string name="budget">Budget</string>
     <string name="messages">Messages</string>
     <string name="calendar">Calendar</string>
+
+    <string-array name="budgets">
+        <item>Personal</item>
+        <item>Household</item>
+    </string-array>
 </resources>
