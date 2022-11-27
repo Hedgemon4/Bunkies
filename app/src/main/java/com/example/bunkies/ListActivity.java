@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
     public static ArrayList<ListItem> listItems = new ArrayList<>();
     private RecyclerView recyclerView;
     private EditText addTask;
+    private ListItemAdapter listItemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +32,19 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        ListItemAdapter listItemAdapter = new ListItemAdapter(listItems);
+        listItemAdapter = new ListItemAdapter(listItems);
         recyclerView.setAdapter(listItemAdapter);
 
         listItemAdapter.setClickListener(this);
 
-        // Initalize EditText for adding tasks
+        // Initialize EditText for adding tasks
         addTask = findViewById(R.id.enterListItemTextView);
 
         addTask.setOnEditorActionListener((task, index, event) -> {
-            if (index == 6 || event.getAction() == 0)
+            if (index == 6 || event.getAction() == 0) {
                 addListItem(addTask.getText().toString());
+                addTask.setText("");
+            }
             return true;
         });
     }
@@ -51,7 +55,11 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
     }
 
     public void addListItem(String itemTitle){
-        if(!itemTitle.equals(""))
-        listItems.add(new ListItem(itemTitle));
+        if(!itemTitle.equals("")) {
+            listItems.add(new ListItem(itemTitle));
+            listItemAdapter.notifyItemInserted(listItemAdapter.getItemCount());
+        } else{
+            Toast.makeText(this, "You must enter text to add a list item.", Toast.LENGTH_SHORT).show();
+        }
     }
 }
