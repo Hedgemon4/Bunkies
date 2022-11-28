@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import java.io.File;
@@ -14,7 +13,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,29 +31,39 @@ public class MainActivity extends AppCompatActivity {
         Transaction t4 = new Transaction("Superstore", 17.99, new Date());
         Transaction t5 = new Transaction("Freshco", 45.00, new Date());
 
-        Transaction[] t = {t1, t2, t3, t4, t5};
+        List<Transaction> t = new ArrayList<Transaction>();
+        t.add(t1);
+        t.add(t2);
+        t.add(t3);
+        t.add(t4);
+        t.add(t5);
 
         BudgetCategory c1 = new BudgetCategory(500.00, "Groceries", "This is to buy groceries with.", t);
         BudgetCategory c2 = new BudgetCategory(1225.50, "Rent", "This is to pay rent with.", t);
         BudgetCategory c3 = new BudgetCategory(30.25, "Transit", "For bussing and taxis.", t);
 
-        BudgetCategory[] c = {c1, c2, c3};
+        List<BudgetCategory> c = new ArrayList<BudgetCategory>();
+        c.add(c1);
+        c.add(c2);
+        c.add(c3);
 
         Budget b1 = new Budget("Personal", "This budget is for me only.", c);
         Budget b2 = new Budget("Household", "This budget is for the whole house.", c);
 
-        Budget[] budgets = new Budget[]{b1, b2};
+        List<Budget> budgets = new ArrayList<Budget>();
+        budgets.add(b1);
+        budgets.add(b2);
 
         MainActivity.saveBudgets(budgets, getApplicationContext());
 
         final Button button = findViewById(R.id.budget);
         button.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), listOfBudgets.class);
+            Intent intent = new Intent(getApplicationContext(), ListOfBudgets.class);
             startActivity(intent);
         });
     }
 
-    public static void saveBudgets(Budget[] budgets, Context activity) {
+    public static void saveBudgets(List<Budget> budgets, Context activity) {
         String fileName = "budgets.dat";
         try {
             File file = new File(activity.getFilesDir(), fileName);
@@ -70,13 +81,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static Budget[] loadBudgets(Context activity) {
+    public static ArrayList<Budget> loadBudgets(Context activity) {
         String fileName = "budgets.dat";
-        Budget[] fetchedBudgets = {};
+        ArrayList<Budget> fetchedBudgets = new ArrayList<Budget>();
 
         try {
             ObjectInputStream inputStream = new ObjectInputStream(activity.openFileInput(fileName));
-            fetchedBudgets  = (Budget[]) inputStream.readObject();
+            fetchedBudgets  = (ArrayList<Budget>) inputStream.readObject();
             inputStream.close();
         }
         catch (Exception e){
