@@ -12,12 +12,13 @@ import android.widget.ListView;
 
 public class ListOfBudgets extends AppCompatActivity {
 
-    Budget[] budgets;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_budgets);
+
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
 
         ArrayAdapter<Budget> adapter = new ArrayAdapter<Budget>(this,
                 android.R.layout.simple_list_item_1, MainActivity.loadBudgets(getApplicationContext()));
@@ -27,7 +28,9 @@ public class ListOfBudgets extends AppCompatActivity {
         // Create a message handling object as an anonymous class.
         AdapterView.OnItemClickListener messageClickedHandler = new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-                // Do something in response to the click
+                Intent intent = new Intent(getApplicationContext(), BudgetView.class);
+                intent.putExtra("pos", position);
+                startActivity(intent);
             }
         };
         listView.setOnItemClickListener(messageClickedHandler);
@@ -40,21 +43,16 @@ public class ListOfBudgets extends AppCompatActivity {
     }
 
     protected void onRestart() {
-// TODO Auto-generated method stub
         super.onRestart();
 
         ArrayAdapter<Budget> adapter = new ArrayAdapter<Budget>(this,
                 android.R.layout.simple_list_item_1, MainActivity.loadBudgets(getApplicationContext()));
         ListView listView = findViewById(R.id.listBudgetsView);
         listView.setAdapter(adapter);
-
-        // Create a message handling object as an anonymous class.
-        AdapterView.OnItemClickListener messageClickedHandler = new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-                // Do something in response to the click
-            }
-        };
-        listView.setOnItemClickListener(messageClickedHandler);
-        //Do your code here
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

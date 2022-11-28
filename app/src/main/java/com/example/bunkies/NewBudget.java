@@ -20,6 +20,9 @@ public class NewBudget extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_budget);
 
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+
         nameInput = findViewById(R.id.newBudgetName);
         descInput = findViewById(R.id.newBudgetDescription);
 
@@ -43,5 +46,11 @@ public class NewBudget extends AppCompatActivity {
         cancelButton.setOnClickListener(v -> {
             finish();
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }
