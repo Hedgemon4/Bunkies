@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -37,6 +38,13 @@ public class BudgetView extends AppCompatActivity {
         int index = getIntent().getIntExtra("pos", 0);
         budget = budgets.get(index);
 
+        final Button button = findViewById(R.id.addCategoryButton);
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), NewCategory.class);
+            intent.putExtra("index", index);
+            startActivity(intent);
+        });
+
         title = findViewById(R.id.budgetTitle);
         title.setText(budget.name);
 
@@ -61,6 +69,18 @@ public class BudgetView extends AppCompatActivity {
 
         budgetProgress = findViewById(R.id.budgetProgressBar);
         budgetProgress.setProgress((int) Math.ceil((budget.calculateTotalSpent() / budget.calculateTotalGoal() * 100)));
+    }
+
+    protected void onRestart() {
+        super.onRestart();
+        budgets = MainActivity.loadBudgets(getApplicationContext());
+
+        int index = getIntent().getIntExtra("pos", 0);
+        budget = budgets.get(index);
+        ArrayAdapter<BudgetCategory> adapter = new ArrayAdapter<BudgetCategory>(this,
+                android.R.layout.simple_list_item_1, budget.categories);
+        ListView listView = findViewById(R.id.listCategoriesView);
+        listView.setAdapter(adapter);
     }
 
     @Override

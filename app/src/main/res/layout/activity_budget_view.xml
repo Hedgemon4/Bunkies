@@ -7,7 +7,7 @@
     tools:context=".BudgetView">
 
     <Button
-        android:id="@+id/newBudgetButton3"
+        android:id="@+id/addCategoryButton"
         android:layout_width="196dp"
         android:layout_height="55dp"
         android:layout_marginBottom="16dp"
