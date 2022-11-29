@@ -13,7 +13,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class BudgetView extends AppCompatActivity {
 
@@ -59,7 +58,10 @@ public class BudgetView extends AppCompatActivity {
         // Create a message handling object as an anonymous class.
         AdapterView.OnItemClickListener messageClickedHandler = new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-
+                Intent intent = new Intent(getApplicationContext(), CategoryView.class);
+                intent.putExtra("budgetIndex", index);
+                intent.putExtra("categoryIndex", position);
+                startActivity(intent);
             }
         };
         listView.setOnItemClickListener(messageClickedHandler);
@@ -74,6 +76,7 @@ public class BudgetView extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         budgets = MainActivity.loadBudgets(getApplicationContext());
+        budgets = (ArrayList<Budget>) Budget.refreshAll(budgets);
 
         int index = getIntent().getIntExtra("pos", 0);
         budget = budgets.get(index);
@@ -81,6 +84,12 @@ public class BudgetView extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, budget.categories);
         ListView listView = findViewById(R.id.listCategoriesView);
         listView.setAdapter(adapter);
+
+        progressText = findViewById(R.id.progressText);
+        progressText.setText(budget.getSpendingProgress() + " spent");
+
+        budgetProgress = findViewById(R.id.budgetProgressBar);
+        budgetProgress.setProgress((int) Math.ceil((budget.calculateTotalSpent() / budget.calculateTotalGoal() * 100)));
     }
 
     @Override

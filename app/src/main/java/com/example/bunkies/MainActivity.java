@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Transaction t1 = new Transaction("Costco", 39.00, new Date());
-        Transaction t2 = new Transaction("Walmart", 100.45, new Date());
-        Transaction t3 = new Transaction("Girl Scout Cookies", 12.67, new Date());
-        Transaction t4 = new Transaction("Superstore", 17.99, new Date());
-        Transaction t5 = new Transaction("Freshco", 45.00, new Date());
+        Transaction t1 = new Transaction("Costco", 39.00, LocalDate.now());
+        Transaction t2 = new Transaction("Walmart", 100.45, LocalDate.now());
+        Transaction t3 = new Transaction("Girl Scout Cookies", 12.67, LocalDate.now());
+        Transaction t4 = new Transaction("Superstore", 17.99, LocalDate.now());
+        Transaction t5 = new Transaction("Freshco", 45.00, LocalDate.now());
 
         List<Transaction> t = new ArrayList<Transaction>();
         t.add(t1);
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void saveBudgets(List<Budget> budgets, Context activity) {
+        budgets = Budget.refreshAll(budgets);
         String fileName = "budgets.dat";
         try {
             File file = new File(activity.getFilesDir(), fileName);

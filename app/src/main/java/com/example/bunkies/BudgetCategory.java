@@ -27,6 +27,11 @@ public class BudgetCategory implements Serializable {
         return total;
     }
 
+    public String getSpendingProgress() {
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        return formatter.format(totalSpent) + " of " + formatter.format(goal);
+    }
+
     @Override
     public String toString() {
         NumberFormat formatter = NumberFormat.getCurrencyInstance();

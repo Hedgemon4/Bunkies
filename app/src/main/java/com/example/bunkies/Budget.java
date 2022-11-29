@@ -44,9 +44,21 @@ public class Budget implements Serializable {
         this.totalSpent = calculateTotalSpent();
     }
 
+    static List<Budget> refreshAll(List<Budget> list) {
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).refresh();
+        }
+        return list;
+    }
+
+    void refresh() {
+        this.goal = calculateTotalGoal();
+        this.totalSpent = calculateTotalSpent();
+    }
+
     double calculateTotalSpent() {
         double total = 0;
-        for(int i = 0; i < categories.size(); i++){
+        for (int i = 0; i < categories.size(); i++) {
             total += categories.get(i).totalSpent;
         }
         return total;
@@ -54,13 +66,13 @@ public class Budget implements Serializable {
 
     double calculateTotalGoal() {
         double total = 0;
-        for(int i = 0; i < categories.size(); i++){
+        for (int i = 0; i < categories.size(); i++) {
             total += categories.get(i).goal;
         }
         return total;
     }
 
-    public String getSpendingProgress(){
+    public String getSpendingProgress() {
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
         return formatter.format(totalSpent) + " of " + formatter.format(goal);
     }
