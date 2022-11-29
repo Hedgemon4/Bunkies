@@ -1,10 +1,12 @@
 package com.example.bunkies;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ListItem {
+public class ListItem implements Serializable {
     private String text;
+    private String description;
     private boolean done;
     private ArrayList<String> people = new ArrayList<>();
 
@@ -12,6 +14,13 @@ public class ListItem {
         this.text = text;
         this.done = done;
         this.people.addAll(Arrays.asList(people));
+    }
+
+    public ListItem(String text, String description, String[] people, boolean done){
+        this.text = text;
+        this.description = description;
+        this.people.addAll(Arrays.asList(people));
+        this.done = done;
     }
 
     public ListItem(String text){

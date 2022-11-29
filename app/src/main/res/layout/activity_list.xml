@@ -36,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:backgroundTint="#FFFFFF"
+        android:onClick="onAddListItemClick"
         android:text="+"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"

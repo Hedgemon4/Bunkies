@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewName" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/editTextTaskDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -62,10 +62,10 @@
         android:text="@string/add_roomies"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTaskDescription" />
 
     <EditText
-        android:id="@+id/addRoomieEditText"
+        android:id="@+id/editTextAddRommie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
