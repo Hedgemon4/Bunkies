@@ -1,11 +1,12 @@
 package com.example.bunkies;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
+import android.view.View;
 import android.widget.Button;
 
 import java.io.File;
@@ -102,6 +103,12 @@ public class MainActivity extends AppCompatActivity {
         }
         return fetchedBudgets;
     }
+
+    public void CalendarButton(View view){
+        Intent intent = new Intent(this, CalendarMainActivity.class);
+        startActivity(intent);
+    }
+
 
     @Override
     public boolean onSupportNavigateUp() {

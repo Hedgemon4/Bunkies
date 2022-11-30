@@ -4,9 +4,13 @@
     <string name="budget">Budget</string>
     <string name="messages">Messages</string>
     <string name="calendar">Calendar</string>
+    <string name="back"><![CDATA[<-]]></string>
+    <string name="forward"><![CDATA[->]]></string>
 
     <string-array name="budgets">
         <item>Personal</item>
         <item>Household</item>
     </string-array>
+    <string name="back"><![CDATA[<-]]></string>
+    <string name="forward"><![CDATA[->]]></string>
 </resources>
