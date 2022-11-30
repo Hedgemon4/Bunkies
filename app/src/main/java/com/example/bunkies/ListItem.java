@@ -8,18 +8,18 @@ public class ListItem implements Serializable {
     private String text;
     private String description;
     private boolean done;
-    private ArrayList<String> people = new ArrayList<>();
+   private boolean[] people;
 
-    public ListItem(String text, boolean done, String[] people){
+    public ListItem(String text, boolean done, boolean[] people){
         this.text = text;
         this.done = done;
-        this.people.addAll(Arrays.asList(people));
+        this.people = people;
     }
 
-    public ListItem(String text, String description, String[] people, boolean done){
+    public ListItem(String text, String description, boolean[] people, boolean done){
         this.text = text;
         this.description = description;
-        this.people.addAll(Arrays.asList(people));
+        this.people = people;
         this.done = done;
     }
 
@@ -43,11 +43,11 @@ public class ListItem implements Serializable {
         this.done = done;
     }
 
-    public ArrayList<String> getPeople() {
+    public boolean[] getPeople() {
         return people;
     }
 
-    public void setPeople(ArrayList<String> people) {
+    public void setPeople(boolean[] people) {
         this.people = people;
     }
 

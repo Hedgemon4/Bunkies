@@ -60,7 +60,16 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
 
     @Override
     public void onTextClick(View view, int position) {
-        Toast.makeText(this, "Text Clicked.", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, AddListItem.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("taskName", addTask.getText().toString());
+        bundle.putString("taskDescription", listItems.get(position).getDescription());
+        bundle.putBooleanArray("taskPeople", new boolean[]{});
+        bundle.putSerializable("listItems", listItems);
+        bundle.putBoolean("newItem", true);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 
     public void addListItem(String itemTitle) {
@@ -79,6 +88,7 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
         bundle.putString("taskDescription", "");
         bundle.putStringArray("taskPeople", new String[]{});
         bundle.putSerializable("listItems", listItems);
+        bundle.putBoolean("newItem", true);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();

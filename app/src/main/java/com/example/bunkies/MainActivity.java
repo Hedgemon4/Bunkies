@@ -20,9 +20,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ListActivity.class);
         Bundle bundle = new Bundle();
         ArrayList<ListItem> listItems = new ArrayList<>();
-        listItems.add(new ListItem("Test", false, new String[]{"Seth"}));
-        listItems.add(new ListItem("Test again", false, new String[]{"Teresa"}));
-        listItems.add(new ListItem("Test once more", true, new String[]{"Seth", "Liam"}));
+        listItems.add(new ListItem("Test", false, new boolean[]{true, false, false, false}));
+        listItems.add(new ListItem("Test again", false, new boolean[]{true, true, false, false}));
+        listItems.add(new ListItem("Test once more", true, new boolean[]{false, true, true, true}));
         bundle.putSerializable("listItems", listItems);
         intent.putExtras(bundle);
         startActivity(intent);
