@@ -37,4 +37,8 @@ public class BudgetCategory implements Serializable {
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
         return name + " (" + formatter.format(totalSpent) + " of " + formatter.format(goal) + " spent)";
     }
+
+    void refresh() {
+        this.totalSpent = calculateTotalSpent();
+    }
 }

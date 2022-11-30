@@ -66,8 +66,8 @@
 
     <ListView
         android:id="@+id/listTransactionsView"
-        android:layout_width="409dp"
-        android:layout_height="412dp"
+        android:layout_width="404dp"
+        android:layout_height="410dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -12,9 +12,9 @@ public class Budget implements Serializable {
     String name;
     String description;
     List<BudgetCategory> categories;
-    List<Roomie> roomies;
+    RoomieValues roomies;
 
-    public Budget(String name, String description, List<BudgetCategory> categories, List<Roomie> roomies) {
+    public Budget(String name, String description, List<BudgetCategory> categories, RoomieValues roomies) {
         this.name = name;
         this.description = description;
         this.categories = categories;
@@ -28,7 +28,7 @@ public class Budget implements Serializable {
         this.name = name;
         this.description = description;
         this.categories = categories;
-        this.roomies = new ArrayList<Roomie>();
+        this.roomies = new RoomieValues();
 
         this.goal = calculateTotalGoal();
         this.totalSpent = calculateTotalSpent();
@@ -38,7 +38,7 @@ public class Budget implements Serializable {
         this.name = name;
         this.description = description;
         this.categories = new ArrayList<BudgetCategory>();
-        this.roomies = new ArrayList<Roomie>();
+        this.roomies = new RoomieValues();
 
         this.goal = calculateTotalGoal();
         this.totalSpent = calculateTotalSpent();
@@ -53,6 +53,9 @@ public class Budget implements Serializable {
 
     void refresh() {
         this.goal = calculateTotalGoal();
+        for(int i = 0; i < categories.size(); i++){
+            categories.get(i).refresh();
+        }
         this.totalSpent = calculateTotalSpent();
     }
 

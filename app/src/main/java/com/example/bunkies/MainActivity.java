@@ -26,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Transaction t1 = new Transaction("Costco", 39.00, LocalDate.now());
-        Transaction t2 = new Transaction("Walmart", 100.45, LocalDate.now());
-        Transaction t3 = new Transaction("Girl Scout Cookies", 12.67, LocalDate.now());
-        Transaction t4 = new Transaction("Superstore", 17.99, LocalDate.now());
-        Transaction t5 = new Transaction("Freshco", 45.00, LocalDate.now());
+        Transaction t1 = new Transaction("Costco", 39.00, LocalDate.now().toString());
+        Transaction t2 = new Transaction("Walmart", 100.45, LocalDate.now().toString());
+        Transaction t3 = new Transaction("Girl Scout Cookies", 12.67, LocalDate.now().toString());
+        Transaction t4 = new Transaction("Superstore", 17.99, LocalDate.now().toString());
+        Transaction t5 = new Transaction("Freshco", 45.00, LocalDate.now().toString());
 
         List<Transaction> t = new ArrayList<Transaction>();
         t.add(t1);
@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
         Budget b1 = new Budget("Personal", "This budget is for me only.", c);
         Budget b2 = new Budget("Household", "This budget is for the whole house.", c);
+        b2.roomies = new RoomieValues();
+        b2.roomies.theophania = true;
 
         List<Budget> budgets = new ArrayList<Budget>();
         budgets.add(b1);

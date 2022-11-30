@@ -20,6 +20,7 @@ public class BudgetView extends AppCompatActivity {
     Budget budget;
 
     TextView description;
+    TextView participants;
     TextView progressText;
     TextView title;
     ProgressBar budgetProgress;
@@ -28,6 +29,8 @@ public class BudgetView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_budget_view);
+
+        participants = findViewById(R.id.participantsView);
 
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
@@ -41,6 +44,14 @@ public class BudgetView extends AppCompatActivity {
         button.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), NewCategory.class);
             intent.putExtra("index", index);
+            intent.putExtra("editIndex", -1);
+            startActivity(intent);
+        });
+
+        final Button editButton = findViewById(R.id.editBudgetButton);
+        editButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), NewBudget.class);
+            intent.putExtra("editIndex", index);
             startActivity(intent);
         });
 
@@ -71,6 +82,14 @@ public class BudgetView extends AppCompatActivity {
 
         budgetProgress = findViewById(R.id.budgetProgressBar);
         budgetProgress.setProgress((int) Math.ceil((budget.calculateTotalSpent() / budget.calculateTotalGoal() * 100)));
+
+        String membersMsg = "Members: Me";
+        if (budget.roomies.chad) membersMsg += ", Chad";
+        if (budget.roomies.gunter) membersMsg += ", Günter";
+        if (budget.roomies.theophania) membersMsg += ", Theophania";
+
+        participants.setText(membersMsg);
+
     }
 
     protected void onRestart() {
@@ -90,6 +109,19 @@ public class BudgetView extends AppCompatActivity {
 
         budgetProgress = findViewById(R.id.budgetProgressBar);
         budgetProgress.setProgress((int) Math.ceil((budget.calculateTotalSpent() / budget.calculateTotalGoal() * 100)));
+
+        title = findViewById(R.id.budgetTitle);
+        title.setText(budget.name);
+
+        description = findViewById(R.id.budgetDescriptionView);
+        description.setText(budget.description);
+
+        String membersMsg = "Members: Me";
+        if (budget.roomies.chad) membersMsg += ", Chad";
+        if (budget.roomies.gunter) membersMsg += ", Günter";
+        if (budget.roomies.theophania) membersMsg += ", Theophania";
+
+        participants.setText(membersMsg);
     }
 
     @Override

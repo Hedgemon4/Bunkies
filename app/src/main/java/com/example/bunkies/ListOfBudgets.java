@@ -38,6 +38,7 @@ public class ListOfBudgets extends AppCompatActivity {
         final Button button = findViewById(R.id.newBudgetButton);
         button.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), NewBudget.class);
+            intent.putExtra("editIndex", -1);
             startActivity(intent);
         });
     }

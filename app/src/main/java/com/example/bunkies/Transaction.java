@@ -10,9 +10,9 @@ import java.util.Date;
 public class Transaction implements Serializable {
     String name;
     double amount;
-    LocalDate date;
+    String date;
 
-    public Transaction(String name, double amount, LocalDate date) {
+    public Transaction(String name, double amount, String date) {
         this.name = name;
         this.amount = amount;
         this.date = date;
@@ -22,6 +22,6 @@ public class Transaction implements Serializable {
     public String toString() {
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
 
-        return name + " (" + formatter.format(amount) + " spent on " + date.toString() + ")";
+        return date + ": " + name + " (" + formatter.format(amount) + ")";
     }
 }
