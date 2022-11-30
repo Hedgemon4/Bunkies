@@ -7,6 +7,12 @@ public class BunkiesList implements Serializable {
     private String[] people;
     private String listFile;
 
+    public BunkiesList(String listName, String[] people, String listFile) {
+        this.listName = listName;
+        this.people = people;
+        this.listFile = listFile;
+    }
+
     public BunkiesList(String listName, String[] people) {
         this.listName = listName;
         this.people = people;

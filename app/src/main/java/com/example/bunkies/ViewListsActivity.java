@@ -5,17 +5,19 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
-public class ViewListsActivity extends AppCompatActivity implements BunkiesListClickListener{
+public class ViewListsActivity extends AppCompatActivity implements BunkiesListClickListener {
     public static ArrayList<BunkiesList> bunkiesLists;
     private RecyclerView recyclerView;
     private BunkiesListAdapter bunkiesListAdapter;
@@ -25,13 +27,14 @@ public class ViewListsActivity extends AppCompatActivity implements BunkiesListC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_lists);
         String filename = "bunkiesLists.txt";
+        bunkiesLists = new ArrayList<>();
         try {
-            FileInputStream fis = openFileInput(filename);
-            ObjectInputStream in = new ObjectInputStream(fis);
-            if(in.available() != 0)
+            File file = new File(this.getFilesDir(),"bunkiesLists.txt");
+            if (file.exists()) {
+                FileInputStream fis = new FileInputStream(file);
+                ObjectInputStream in = new ObjectInputStream(fis);
                 bunkiesLists = (ArrayList<BunkiesList>) in.readObject();
-            else{
-                bunkiesLists = new ArrayList<>();
+                System.out.println("Loaded file");
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -52,9 +55,12 @@ public class ViewListsActivity extends AppCompatActivity implements BunkiesListC
         Toast.makeText(this, "Clicked.", Toast.LENGTH_SHORT).show();
     }
 
-    public void onNewListClick(View view){
+    public void onNewListClick(View view) {
         Toast.makeText(this, "Clicked.", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, NewListActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("bunkiesLists", bunkiesLists);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
-
-
 }
