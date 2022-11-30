@@ -8,23 +8,27 @@ public class ListItem implements Serializable {
     private String text;
     private String description;
     private boolean done;
-   private boolean[] people;
+    private boolean[] people;
 
-    public ListItem(String text, boolean done, boolean[] people){
+    public ListItem(String text, boolean[] people, boolean done) {
         this.text = text;
         this.done = done;
         this.people = people;
+        this.description = "";
     }
 
-    public ListItem(String text, String description, boolean[] people, boolean done){
+    public ListItem(String text, String description, boolean[] people, boolean done) {
         this.text = text;
         this.description = description;
         this.people = people;
         this.done = done;
     }
 
-    public ListItem(String text){
+    public ListItem(String text) {
         this.text = text;
+        this.description = "";
+        this.people = new boolean[]{false, false, false, false};
+        this.done = false;
     }
 
     public String getText() {
@@ -51,11 +55,11 @@ public class ListItem implements Serializable {
         this.people = people;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
-    public void setDescription(String description){
+    public void setDescription(String description) {
         this.description = description;
     }
 }

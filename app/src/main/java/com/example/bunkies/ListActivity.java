@@ -62,11 +62,12 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
     public void onTextClick(View view, int position) {
         Intent intent = new Intent(this, AddListItem.class);
         Bundle bundle = new Bundle();
-        bundle.putString("taskName", addTask.getText().toString());
+        bundle.putString("taskName", listItems.get(position).getText());
         bundle.putString("taskDescription", listItems.get(position).getDescription());
-        bundle.putBooleanArray("taskPeople", new boolean[]{});
+        bundle.putBooleanArray("people", listItems.get(position).getPeople());
         bundle.putSerializable("listItems", listItems);
-        bundle.putBoolean("newItem", true);
+        bundle.putBoolean("newItem", false);
+        bundle.putInt("index", position);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
@@ -74,19 +75,19 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
 
     public void addListItem(String itemTitle) {
         if (!itemTitle.equals("")) {
-            listItems.add(new ListItem(itemTitle));
+            listItems.add(new ListItem(itemTitle, "", new boolean[]{false, true, false, false}, false));
             listItemAdapter.notifyItemInserted(listItemAdapter.getItemCount());
         } else {
             Toast.makeText(this, "You must enter text to add a list item.", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void onAddListItemClick(View view){
+    public void onAddListItemClick(View view) {
         Intent intent = new Intent(this, AddListItem.class);
         Bundle bundle = new Bundle();
         bundle.putString("taskName", addTask.getText().toString());
         bundle.putString("taskDescription", "");
-        bundle.putStringArray("taskPeople", new String[]{});
+        bundle.putBooleanArray("people", new boolean[]{false, false, false, false});
         bundle.putSerializable("listItems", listItems);
         bundle.putBoolean("newItem", true);
         intent.putExtras(bundle);

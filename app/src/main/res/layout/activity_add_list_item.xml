@@ -102,10 +102,10 @@
             android:layout_height="match_parent">
 
             <CheckBox
-                android:id="@+id/addListChadCheckbox"
+                android:id="@+id/addListItemChadCheckbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CheckBox" />
+                android:text="@string/chad" />
         </TableRow>
 
         <TableRow
@@ -113,10 +113,10 @@
             android:layout_height="match_parent">
 
             <CheckBox
-                android:id="@+id/addListEmilyCheckbox"
+                android:id="@+id/addListItemEmilyCheckbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CheckBox" />
+                android:text="@string/emily" />
         </TableRow>
 
         <TableRow
@@ -124,10 +124,10 @@
             android:layout_height="match_parent">
 
             <CheckBox
-                android:id="@+id/addListGünterCheckbox"
+                android:id="@+id/addListItemGünterCheckbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CheckBox" />
+                android:text="@string/gunter" />
         </TableRow>
 
         <TableRow
@@ -135,10 +135,10 @@
             android:layout_height="match_parent">
 
             <CheckBox
-                android:id="@+id/checkBox6"
+                android:id="@+id/addListItemTheoCheckbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CheckBox" />
+                android:text="@string/theo" />
         </TableRow>
     </TableLayout>
 
