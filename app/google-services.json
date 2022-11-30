@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "716379455189",
+    "project_id": "bunkies-e722a",
+    "storage_bucket": "bunkies-e722a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716379455189:android:0f8e17cfba96ed8b952c5c",
+        "android_client_info": {
+          "package_name": "com.example.bunkies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716379455189-u0vn9qjjoqj3ld12f3ks5hl63spvhqd6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDjUTHhz30ujb-Kq3rVEr2Lwix_DJ3kf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716379455189-u0vn9qjjoqj3ld12f3ks5hl63spvhqd6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

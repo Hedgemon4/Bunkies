@@ -1,7 +1,2 @@
 <resources>
-    <string name="app_name">Bunkies</string>
-    <string name="lists">Lists</string>
-    <string name="budget">Budget</string>
-    <string name="messages">Messages</string>
-    <string name="calendar">Calendar</string>
 </resources>
