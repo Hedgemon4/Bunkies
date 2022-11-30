@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -50,11 +52,15 @@ public class ViewListsActivity extends AppCompatActivity implements BunkiesListC
         recyclerView.setAdapter(bunkiesListAdapter);
 
         bunkiesListAdapter.setClickListener(this);
+
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+        getSupportActionBar().setTitle("Lists");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#e29f1d")));
     }
 
     @Override
     public void onTextClick(View view, int position) {
-        Toast.makeText(this, "Clicked.", Toast.LENGTH_SHORT).show();
         try {
             File file = new File(this.getFilesDir(), bunkiesLists.get(position).getListFile());
             ArrayList<ListItem> listItems = new ArrayList<>();
@@ -82,12 +88,17 @@ public class ViewListsActivity extends AppCompatActivity implements BunkiesListC
     }
 
     public void onNewListClick(View view) {
-        Toast.makeText(this, "Clicked.", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, NewListActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("bunkiesLists", bunkiesLists);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

@@ -3,6 +3,8 @@ package com.example.bunkies;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -37,6 +39,11 @@ public class NewListActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         bunkiesLists = (ArrayList<BunkiesList>) bundle.getSerializable("bunkiesLists");
+
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+        getSupportActionBar().setTitle("New List");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#e29f1d")));
     }
 
     public void onCancelClick(View view) {
@@ -88,5 +95,13 @@ public class NewListActivity extends AppCompatActivity {
                 Toast.makeText(this, "You must select at least one person to add to the list.", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Intent intent = new Intent(this, ViewListsActivity.class);
+        startActivity(intent);
+        finish();
+        return true;
     }
 }

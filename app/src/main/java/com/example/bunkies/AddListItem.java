@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +31,8 @@ public class AddListItem extends AppCompatActivity implements PersonClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_list_item);
+
+        assert getSupportActionBar() != null;   //null check
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -59,13 +63,20 @@ public class AddListItem extends AppCompatActivity implements PersonClickListene
         editTaskDescription = findViewById(R.id.editTextTaskDescription);
 
         Button button = findViewById(R.id.addListItemAdd);
-        if (!newItem)
+
+        if (!newItem) {
             button.setText("Save");
+            getSupportActionBar().setTitle(taskName);
+        } else
+            getSupportActionBar().setTitle("New Task");
 
         if (!taskName.equals(""))
             editTaskName.setText(taskName);
         if (!taskDescription.equals(""))
             editTaskDescription.setText(taskDescription);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#e29f1d")));
     }
 
     public void onCancelClick(View view) {
@@ -108,5 +119,11 @@ public class AddListItem extends AppCompatActivity implements PersonClickListene
         boolean b = listPeople.get(position).isOnTask();
         listPeople.get(position).setOnTask(!b);
         personItemAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onCancelClick(null);
+        return true;
     }
 }

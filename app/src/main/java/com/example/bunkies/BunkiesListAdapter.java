@@ -31,6 +31,7 @@ public class BunkiesListAdapter extends RecyclerView.Adapter<BunkiesListAdapter.
         String listName = bunkiesLists.get(position).getListName();
 
         holder.textView.setText(listName);
+        holder.textView.setPaintFlags(holder.textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         holder.textView.setOnClickListener((text) -> bunkiesListClickListener.onTextClick(text, holder.getAdapterPosition()));
     }
 

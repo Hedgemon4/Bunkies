@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -56,6 +58,11 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
             }
             return true;
         });
+
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+        getSupportActionBar().setTitle(bunkiesList.getListName());
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#e29f1d")));
     }
 
     @Override
@@ -122,5 +129,12 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        saveList();
+        finish();
+        return true;
     }
 }
