@@ -96,8 +96,10 @@ public class messageListApdater extends RecyclerView.Adapter {
            // timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
             Date d = new Date();
              int j = d.getHours();
-             String str = Integer.toString(j);
-            str = str+":00pm";
+            int k = d.getMinutes();
+            String str = Integer.toString(j);
+            String str1 = Integer.toString(k);
+            str = str+k+"pm";
 
             timeText.setText(str);
             dateText.setVisibility(View.GONE);
@@ -125,16 +127,16 @@ public class messageListApdater extends RecyclerView.Adapter {
             //timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
             Date d = new Date();
             int j = d.getHours();
+            int k = d.getMinutes();
             String str = Integer.toString(j);
-            str = str+":00pm";
+            String str1 = Integer.toString(k);
+            str = str+k+"pm";
 
             timeText.setText(str);
             dateText.setVisibility(View.GONE);
 
             //Uncomment for group chat
-            nameText.setText("Chad");
-
-            // Insert the profile image from the URL into the ImageView.
+            nameText.setVisibility(View.GONE);
         }
     }
 

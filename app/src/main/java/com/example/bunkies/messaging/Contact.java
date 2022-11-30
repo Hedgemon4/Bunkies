@@ -25,7 +25,7 @@ public class Contact {
 
     public static ArrayList<Contact> createContactsList(int numContacts) {
         ArrayList<Contact> contacts = new ArrayList<Contact>();
-        List<String> names = Arrays.asList("Chad","Nick","Sam","Jessica","The Boyz");
+        List<String> names = Arrays.asList("Chad","Emily","Günter","Theophania","The Boyz");
         for (int i = 0; i < numContacts; i++) {
             contacts.add(new Contact(names.get(i), i <= numContacts / 2));
         }
