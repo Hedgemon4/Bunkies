@@ -56,14 +56,13 @@ public class MessageListActivity extends AppCompatActivity {
         List<String> messageList = Arrays.asList("Hey","Morning", "Could you do some dishes today?", "lol no");
         return messageList;
     }
-    public List addMessage(View view){
+    public void addMessage(View view){
         EditText newMessage = findViewById(R.id.edit_gchat_message);
         if(newMessage == null){
             Toast.makeText(this, "No message to send", Toast.LENGTH_SHORT).show();
-            return messageList;
         }
         messageList.add(newMessage.getText().toString());
-        return messageList;
+        mMessageRecycler.notify();
 
     }
     @Override
