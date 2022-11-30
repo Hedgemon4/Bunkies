@@ -1,5 +1,6 @@
 package com.example.bunkies.messaging;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,7 @@ public class MessageListActivity extends AppCompatActivity {
     private RecyclerView mMessageRecycler;
     private messageListApdater mMessageAdapter;
     List<String> messageList;
+    TextView chatName;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,7 @@ public class MessageListActivity extends AppCompatActivity {
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
 
-        TextView chatName = findViewById(R.id.textView_Gchannel);
+        chatName = findViewById(R.id.textView_Gchannel);
         Intent intent = getIntent();
         String name = intent.getExtras().getString("chatName");
         chatName.setText(name);
@@ -42,7 +44,8 @@ public class MessageListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent editChat = new Intent(MessageListActivity.this, editChatActivity.class);
-                startActivity(editChat);
+                editChat.putExtra("ChatName",name);
+                startActivityForResult(editChat,1);
             }
         });
         mMessageRecycler = (RecyclerView) findViewById(R.id.recycler_gchat);
@@ -51,6 +54,9 @@ public class MessageListActivity extends AppCompatActivity {
         mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
         mMessageRecycler.setAdapter(mMessageAdapter);
     }
+
+
+
     public List messageCreation(){
 
         List<String> messageList = Arrays.asList("Hey","Morning", "Could you do some dishes today?", "lol no");
@@ -62,9 +68,23 @@ public class MessageListActivity extends AppCompatActivity {
             Toast.makeText(this, "No message to send", Toast.LENGTH_SHORT).show();
         }
         messageList.add(newMessage.getText().toString());
-        mMessageRecycler.notify();
 
+        mMessageRecycler.getAdapter().notifyDataSetChanged();
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        switch(requestCode){
+            case(1):{
+                if(resultCode == Activity.RESULT_OK){
+                    String newName = data.getStringExtra("chatName");
+                    chatName.setText(newName);
+                }
+            }
+        }
+    }
+
+
     @Override
     public boolean onSupportNavigateUp() {
         finish();

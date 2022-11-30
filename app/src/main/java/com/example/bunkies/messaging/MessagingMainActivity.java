@@ -1,5 +1,6 @@
 package com.example.bunkies.messaging;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 
 public class MessagingMainActivity extends AppCompatActivity {
     ArrayList<Contact> contacts;
+    RecyclerView rvContacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +26,13 @@ public class MessagingMainActivity extends AppCompatActivity {
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
 
-        RecyclerView rvContacts = (RecyclerView) findViewById(R.id.recycler_gchat);
+        rvContacts = (RecyclerView) findViewById(R.id.recycler_gchat);
         Button newChat = findViewById(R.id.Addbutton);
         newChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent newChat = new Intent(MessagingMainActivity.this, newChatActivity.class);
-                startActivity(newChat);
+                startActivityForResult(newChat, 1);
             }
         });
 
@@ -40,6 +42,19 @@ public class MessagingMainActivity extends AppCompatActivity {
         rvContacts.setAdapter(adapter);
         rvContacts.setLayoutManager(new LinearLayoutManager(this));
 
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        switch(requestCode){
+            case(1):{
+                if(resultCode == Activity.RESULT_OK){
+                    String newName = data.getStringExtra("chatName");
+                    contacts.add(Contact.addContact(newName));
+                    rvContacts.getAdapter().notifyDataSetChanged();
+                }
+            }
+        }
     }
     @Override
     public boolean onSupportNavigateUp() {

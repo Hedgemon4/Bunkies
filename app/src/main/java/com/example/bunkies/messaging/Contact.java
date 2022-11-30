@@ -23,11 +23,17 @@ public class Contact {
 
     private static int lastContactId = 0;
 
+    public static Contact addContact(String name){
+        Contact contact = new Contact(name, true);
+
+        return contact;
+    }
+
     public static ArrayList<Contact> createContactsList(int numContacts) {
         ArrayList<Contact> contacts = new ArrayList<Contact>();
         List<String> names = Arrays.asList("Chad","Emily","Günter","Theophania","The Boyz");
         for (int i = 0; i < numContacts; i++) {
-            contacts.add(new Contact(names.get(i), i <= numContacts / 2));
+            contacts.add(new Contact(names.get(i), true));
         }
 
         return contacts;
