@@ -8,4 +8,20 @@ public class PersonItem {
         this.name = name;
         this.onTask = onTask;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isOnTask() {
+        return onTask;
+    }
+
+    public void setOnTask(boolean onTask) {
+        this.onTask = onTask;
+    }
 }
