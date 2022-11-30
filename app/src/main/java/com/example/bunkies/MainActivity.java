@@ -25,7 +25,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initializeBudget();
+    }
 
+    void initializeBudget(){
         Transaction t1 = new Transaction("Costco", 39.00, LocalDate.now().toString());
         Transaction t2 = new Transaction("Walmart", 100.45, LocalDate.now().toString());
         Transaction t3 = new Transaction("Girl Scout Cookies", 12.67, LocalDate.now().toString());
@@ -59,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
         MainActivity.saveBudgets(budgets, getApplicationContext());
 
-        final Button button = findViewById(R.id.budget);
-        button.setOnClickListener(v -> {
+        final Button budgetButton = findViewById(R.id.budget);
+        budgetButton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), ListOfBudgets.class);
             startActivity(intent);
         });
