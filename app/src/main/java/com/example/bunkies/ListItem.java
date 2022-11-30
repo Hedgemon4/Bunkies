@@ -1,8 +1,6 @@
 package com.example.bunkies;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ListItem implements Serializable {
     private String text;

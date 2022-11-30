@@ -78,7 +78,7 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
             listItems.add(new ListItem(itemTitle, "", new boolean[]{false, true, false, false}, false));
             listItemAdapter.notifyItemInserted(listItemAdapter.getItemCount());
         } else {
-            Toast.makeText(this, "You must enter text to add a list item.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You must enter a task name to add a list item.", Toast.LENGTH_SHORT).show();
         }
     }
 
