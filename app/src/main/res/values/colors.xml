@@ -11,4 +11,6 @@
     <color name="negativeOrange">#FFFF7036</color>
     <color name="budgetGreen">#FF06B600</color>
     <color name="editGrey">#707070</color>
+    <color name="orange">#eb7d34</color>
+    <color name="list_yellow">#e29f1d</color>
 </resources>

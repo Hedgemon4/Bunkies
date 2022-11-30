@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+
 import com.example.bunkies.messaging.MessagingMainActivity;
 
 import java.io.File;
@@ -125,5 +126,6 @@ public class MainActivity extends AppCompatActivity {
     public void messageClick(View v){
         Intent messaging = new Intent(MainActivity.this, MessagingMainActivity.class);
         startActivity(messaging);
+
     }
 }

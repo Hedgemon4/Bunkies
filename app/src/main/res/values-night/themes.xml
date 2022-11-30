@@ -13,4 +13,10 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="ListTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/teal_200</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="android:statusBarColor">@color/orange</item>
+    </style>
 </resources>
