@@ -1,9 +1,11 @@
 package com.example.bunkies;
 
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +31,14 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.MyView
     public void onBindViewHolder(@NonNull ListItemAdapter.MyViewHolder holder, int position) {
         String listItemText = listItems.get(position).getText();
 
-        holder.checkBox.setText(listItemText);
+        holder.textView.setText(listItemText);
+        holder.textView.setOnClickListener((text) -> listClickListener.onTextClick(text, holder.getAdapterPosition()));
+        if (listItems.get(position).isDone()) {
+            holder.textView.setPaintFlags(holder.textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        } else
+            holder.textView.setPaintFlags(0);
+        holder.textView.setPaintFlags(holder.textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
         holder.checkBox.setChecked(listItems.get(position).isDone());
         holder.checkBox.setOnCheckedChangeListener(((compoundButton, b) -> listClickListener.onCheckClick(compoundButton, holder.getAdapterPosition())));
     }
@@ -45,16 +54,20 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final CheckBox checkBox;
+        private final TextView textView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             checkBox = itemView.findViewById(R.id.checkBox);
+            textView = itemView.findViewById(R.id.listItemText);
         }
 
         @Override
         public void onClick(View view) {
-            if (listClickListener != null)
+            if (listClickListener != null) {
                 listClickListener.onCheckClick(view, getAdapterPosition());
+                //listClickListener.onTextClick(view, getAdapterPosition());
+            }
         }
     }
 }

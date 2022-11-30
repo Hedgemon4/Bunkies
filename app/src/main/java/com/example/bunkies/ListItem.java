@@ -50,4 +50,12 @@ public class ListItem implements Serializable {
     public void setPeople(ArrayList<String> people) {
         this.people = people;
     }
+
+    public String getDescription(){
+        return this.description;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
+    }
 }

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -54,7 +55,12 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
     public void onCheckClick(View view, int position) {
         boolean b = listItems.get(position).isDone();
         listItems.get(position).setDone(!b);
-        System.out.printf("Clicked");
+        listItemAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onTextClick(View view, int position) {
+        Toast.makeText(this, "Text Clicked.", Toast.LENGTH_SHORT).show();
     }
 
     public void addListItem(String itemTitle) {
