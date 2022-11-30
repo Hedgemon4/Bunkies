@@ -29,6 +29,13 @@ public class ListItem implements Serializable {
         this.done = false;
     }
 
+    public ListItem(String text, boolean done) {
+        this.text = text;
+        this.done = done;
+        this.description = "";
+        this.people = new boolean[0];
+    }
+
     public String getText() {
         return text;
     }

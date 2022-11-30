@@ -73,7 +73,7 @@ public class ViewListsActivity extends AppCompatActivity implements BunkiesListC
             Intent intent = new Intent(this, ListActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("listItems", listItems);
-            bundle.putString("listName", bunkiesLists.get(position).getListName());
+            bundle.putSerializable("bunkiesList", bunkiesLists.get(position));
             intent.putExtras(bundle);
             startActivity(intent);
         } catch (IOException | ClassNotFoundException e) {

@@ -13,6 +13,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity implements ListClickListener {
@@ -21,6 +25,7 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
     private RecyclerView recyclerView;
     private EditText addTask;
     private ListItemAdapter listItemAdapter;
+    private BunkiesList bunkiesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,8 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
 
         Bundle bundle = getIntent().getExtras();
         listItems = (ArrayList<ListItem>) bundle.getSerializable("listItems");
+        bunkiesList = (BunkiesList) bundle.getSerializable("bunkiesList");
+        saveList();
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -56,6 +63,7 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
         boolean b = listItems.get(position).isDone();
         listItems.get(position).setDone(!b);
         listItemAdapter.notifyDataSetChanged();
+        saveList();
     }
 
     @Override
@@ -68,15 +76,19 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
         bundle.putSerializable("listItems", listItems);
         bundle.putBoolean("newItem", false);
         bundle.putInt("index", position);
+        bundle.putSerializable("bunkiesList", bunkiesList);
         intent.putExtras(bundle);
         startActivity(intent);
+        saveList();
         finish();
     }
 
     public void addListItem(String itemTitle) {
         if (!itemTitle.equals("")) {
-            listItems.add(new ListItem(itemTitle, "", new boolean[]{false, true, false, false}, false));
+            boolean[] b = new boolean[bunkiesList.getPeople().length];
+            listItems.add(new ListItem(itemTitle, "", b, false));
             listItemAdapter.notifyItemInserted(listItemAdapter.getItemCount());
+            saveList();
         } else {
             Toast.makeText(this, "You must enter a task name to add a list item.", Toast.LENGTH_SHORT).show();
         }
@@ -87,15 +99,28 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
         Bundle bundle = new Bundle();
         bundle.putString("taskName", addTask.getText().toString());
         bundle.putString("taskDescription", "");
-        bundle.putBooleanArray("people", new boolean[]{false, false, false, false});
+        bundle.putBooleanArray("people", new boolean[bunkiesList.getPeople().length]);
         bundle.putSerializable("listItems", listItems);
         bundle.putBoolean("newItem", true);
+        bundle.putSerializable("bunkiesList", bunkiesList);
         intent.putExtras(bundle);
         startActivity(intent);
+        saveList();
         finish();
     }
 
     public void saveList() {
-
+        try {
+            File file = new File(this.getFilesDir(), bunkiesList.getListFile());
+            file.delete();
+            file.createNewFile();
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            ObjectOutputStream out = new ObjectOutputStream(fileOutputStream);
+            out.writeObject(listItems);
+            out.close();
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
