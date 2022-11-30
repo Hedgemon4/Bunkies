@@ -17,16 +17,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onListClick(View view) {
-//        Intent intent = new Intent(this, ListActivity.class);
-//        Bundle bundle = new Bundle();
-//        ArrayList<ListItem> listItems = new ArrayList<>();
-//        listItems.add(new ListItem("Test", "",  new boolean[]{true, false, false, false}, false));
-//        listItems.add(new ListItem("Test again", "",  new boolean[]{true, true, false, false}, false));
-//        listItems.add(new ListItem("Test once more", "", new boolean[]{false, true, true, true}, true));
-//        bundle.putSerializable("listItems", listItems);
-//        intent.putExtras(bundle);
-//        startActivity(intent);
-
         Intent intent = new Intent(this, ViewListsActivity.class);
         startActivity(intent);
     }

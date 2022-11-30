@@ -13,8 +13,10 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class ViewListsActivity extends AppCompatActivity implements BunkiesListClickListener {
@@ -29,7 +31,7 @@ public class ViewListsActivity extends AppCompatActivity implements BunkiesListC
         String filename = "bunkiesLists.txt";
         bunkiesLists = new ArrayList<>();
         try {
-            File file = new File(this.getFilesDir(),"bunkiesLists.txt");
+            File file = new File(this.getFilesDir(), "bunkiesLists.txt");
             if (file.exists()) {
                 FileInputStream fis = new FileInputStream(file);
                 ObjectInputStream in = new ObjectInputStream(fis);
@@ -53,6 +55,30 @@ public class ViewListsActivity extends AppCompatActivity implements BunkiesListC
     @Override
     public void onTextClick(View view, int position) {
         Toast.makeText(this, "Clicked.", Toast.LENGTH_SHORT).show();
+        try {
+            File file = new File(this.getFilesDir(), bunkiesLists.get(position).getListFile());
+            ArrayList<ListItem> listItems = new ArrayList<>();
+            if (file.exists()) {
+                FileInputStream fis = new FileInputStream(file);
+                ObjectInputStream in = new ObjectInputStream(fis);
+                listItems = (ArrayList<ListItem>) in.readObject();
+            } else {
+                file.createNewFile();
+                FileOutputStream fileOutputStream = new FileOutputStream(file);
+                ObjectOutputStream out = new ObjectOutputStream(fileOutputStream);
+                out.writeObject(listItems);
+                out.close();
+                fileOutputStream.close();
+            }
+            Intent intent = new Intent(this, ListActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("listItems", listItems);
+            bundle.putString("listName", bunkiesLists.get(position).getListName());
+            intent.putExtras(bundle);
+            startActivity(intent);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onNewListClick(View view) {
@@ -62,5 +88,6 @@ public class ViewListsActivity extends AppCompatActivity implements BunkiesListC
         bundle.putSerializable("bunkiesLists", bunkiesLists);
         intent.putExtras(bundle);
         startActivity(intent);
+        finish();
     }
 }

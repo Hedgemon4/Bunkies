@@ -78,7 +78,6 @@ public class NewListActivity extends AppCompatActivity {
                     out.writeObject(bunkiesLists);
                     out.close();
                     fileOutputStream.close();
-                    System.out.println("Got here");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
