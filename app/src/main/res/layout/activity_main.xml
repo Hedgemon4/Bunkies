@@ -11,6 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="176dp"
+        android:backgroundTint="@color/list_yellow"
+        android:onClick="onListClick"
         android:text="@string/lists"
         app:layout_constraintEnd_toStartOf="@+id/budget"
         app:layout_constraintHorizontal_bias="0.437"

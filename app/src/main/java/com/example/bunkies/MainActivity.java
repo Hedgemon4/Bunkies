@@ -115,4 +115,9 @@ public class MainActivity extends AppCompatActivity {
         finish();
         return true;
     }
+
+    public void onListClick(View view) {
+        Intent intent = new Intent(this, ViewListsActivity.class);
+        startActivity(intent);
+    }
 }
