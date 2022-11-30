@@ -14,16 +14,16 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class AddListItem extends AppCompatActivity implements ListClickListener{
+public class AddListItem extends AppCompatActivity implements PersonClickListener {
     private EditText editTaskName;
     private EditText editTaskDescription;
     private RecyclerView recyclerView;
-    private ListItemAdapter listItemAdapter;
+    private PersonItemAdapter personItemAdapter;
     public static ArrayList<ListItem> listItems;
     private boolean newItem;
     private int index;
     private BunkiesList bunkiesList;
-    public static ArrayList<ListItem> listPeople;
+    public static ArrayList<PersonItem> listPeople;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +46,14 @@ public class AddListItem extends AppCompatActivity implements ListClickListener{
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        listItemAdapter = new ListItemAdapter(listPeople);
-        recyclerView.setAdapter(listItemAdapter);
+        personItemAdapter = new PersonItemAdapter(listPeople);
+        recyclerView.setAdapter(personItemAdapter);
 
-        listItemAdapter.setClickListener(this);
+        personItemAdapter.setClickListener(this);
 
         String[] names = bunkiesList.getPeople();
         for (int i = 0; i < names.length; i++)
-            listPeople.add(new ListItem(names[i], people[i]));
+            listPeople.add(new PersonItem(names[i], people[i]));
 
         editTaskName = findViewById(R.id.editTaskName);
         editTaskDescription = findViewById(R.id.editTextTaskDescription);
@@ -83,7 +83,7 @@ public class AddListItem extends AppCompatActivity implements ListClickListener{
         String taskDescription = editTaskDescription.getText().toString();
         boolean[] people = new boolean[bunkiesList.getPeople().length];
         for (int i = 0; i < people.length; i++)
-            people[i] = listPeople.get(i).isDone();
+            people[i] = listPeople.get(i).isOnTask();
 
         if (!taskName.equals("")) {
             if (newItem)
@@ -98,21 +98,15 @@ public class AddListItem extends AppCompatActivity implements ListClickListener{
             startActivity(intent);
             finish();
         } else {
-            Toast.makeText(this, "You must enter text to add a list item.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You must enter a task name to add a list item.", Toast.LENGTH_SHORT).show();
+            editTaskName.setError("Please enter a name for your list item.");
         }
     }
 
     @Override
     public void onCheckClick(View view, int position) {
-        boolean b = listPeople.get(position).isDone();
-        listPeople.get(position).setDone(!b);
-        listItemAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onTextClick(View view, int position) {
-        boolean b = listPeople.get(position).isDone();
-        listPeople.get(position).setDone(!b);
-        listItemAdapter.notifyDataSetChanged();
+        boolean b = listPeople.get(position).isOnTask();
+        listPeople.get(position).setOnTask(!b);
+        personItemAdapter.notifyDataSetChanged();
     }
 }
