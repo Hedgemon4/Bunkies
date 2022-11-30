@@ -58,7 +58,7 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.MyView
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            checkBox = itemView.findViewById(R.id.checkBox);
+            checkBox = itemView.findViewById(R.id.listItemcheckBox);
             textView = itemView.findViewById(R.id.listItemText);
         }
 

@@ -7,10 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -39,7 +37,7 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
         bunkiesList = (BunkiesList) bundle.getSerializable("bunkiesList");
         saveList();
 
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.listItemRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
