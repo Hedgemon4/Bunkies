@@ -17,6 +17,7 @@
         android:onClick="onListClick"
         android:text="@string/lists"
         android:textSize="24sp"
+        android:drawableLeft="@drawable/checkboxImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +33,7 @@
         android:backgroundTint="@color/budgetGreen"
         android:text="@string/budget"
         android:textSize="24sp"
+        android:drawableLeft="@drawable/budgetSymbol"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lists" />
@@ -47,6 +49,7 @@
         android:onClick="messageClick"
         android:text="@string/messages"
         android:textSize="24sp"
+        android:drawableLeft="@drawable/messagesSymbol"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/budget" />
@@ -62,6 +65,7 @@
         android:onClick="CalendarButton"
         android:text="@string/calendar"
         android:textSize="24sp"
+        android:drawableLeft="@drawable/calendarSymbol"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
