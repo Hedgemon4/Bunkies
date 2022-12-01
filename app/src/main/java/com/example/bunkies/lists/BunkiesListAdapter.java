@@ -1,6 +1,5 @@
 package com.example.bunkies.lists;
 
-import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +31,7 @@ public class BunkiesListAdapter extends RecyclerView.Adapter<BunkiesListAdapter.
         String listName = bunkiesLists.get(position).getListName();
 
         holder.textView.setText(listName);
-        holder.textView.setPaintFlags(holder.textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        //holder.textView.setPaintFlags(holder.textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         holder.textView.setOnClickListener((text) -> bunkiesListClickListener.onTextClick(text, holder.getAdapterPosition()));
     }
 
@@ -55,6 +54,7 @@ public class BunkiesListAdapter extends RecyclerView.Adapter<BunkiesListAdapter.
 
         @Override
         public void onClick(View view) {
+            System.out.println("This is a test!");
             if (bunkiesListClickListener != null) {
                 bunkiesListClickListener.onTextClick(view, getAdapterPosition());
             }
