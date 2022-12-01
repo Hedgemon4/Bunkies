@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 
 import com.example.bunkies.R;
@@ -96,6 +97,11 @@ public class ViewListsActivity extends AppCompatActivity implements BunkiesListC
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        this.onTextClick(view, position);
     }
 
     public void onNewListClick(View view) {

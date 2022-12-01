@@ -50,14 +50,12 @@ public class BunkiesListAdapter extends RecyclerView.Adapter<BunkiesListAdapter.
         public MyViewHolder(View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.bunkiesListTextView);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            System.out.println("This is a test!");
-            if (bunkiesListClickListener != null) {
-                bunkiesListClickListener.onTextClick(view, getAdapterPosition());
-            }
+            bunkiesListClickListener.onItemClick(view, getAdapterPosition());
         }
     }
 }
