@@ -2,6 +2,8 @@ package com.example.bunkies.messaging;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,14 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bunkies.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class MessageListActivity extends AppCompatActivity {
-    private RecyclerView mMessageRecycler;
-    private messageListApdater mMessageAdapter;
+    private RecyclerView messageRecyclerView;
+    private messageListApdater messageAdapter;
     List<String> messageList;
     TextView chatName;
+    int counter;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,9 @@ public class MessageListActivity extends AppCompatActivity {
         chatName = findViewById(R.id.textView_Gchannel);
         Intent intent = getIntent();
         String name = intent.getExtras().getString("chatName");
+
+        getSupportActionBar().setTitle(name);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable((Color.parseColor("#FFFF7036"))));
         chatName.setText(name);
         FloatingActionButton editButton = findViewById(R.id.editButton);
         Button send = findViewById(R.id.button_gchat_send);
@@ -48,18 +55,20 @@ public class MessageListActivity extends AppCompatActivity {
                 startActivityForResult(editChat,1);
             }
         });
-        mMessageRecycler = (RecyclerView) findViewById(R.id.recycler_gchat);
+        messageRecyclerView = findViewById(R.id.recycler_gchat);
         messageList = messageCreation();
-        mMessageAdapter = new messageListApdater(this, messageList);
-        mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
-        mMessageRecycler.setAdapter(mMessageAdapter);
+        messageAdapter = new messageListApdater(this, messageList);
+        counter = messageList.size();
+        messageRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        messageRecyclerView.setAdapter(messageAdapter);
     }
 
 
 
-    public List messageCreation(){
-
-        List<String> messageList = Arrays.asList("Hey","Morning", "Could you do some dishes today?", "lol no");
+    public List<String> messageCreation(){
+        String [] messages = {"Hey","Morning", "Could you do some dishes today?", "lol no"};
+        List<String> list = Arrays.asList(messages);
+        messageList = new ArrayList<String>(list);
         return messageList;
     }
     public void addMessage(View view){
@@ -67,10 +76,20 @@ public class MessageListActivity extends AppCompatActivity {
         if(newMessage == null){
             Toast.makeText(this, "No message to send", Toast.LENGTH_SHORT).show();
         }
-        messageList.add(newMessage.getText().toString());
+        assert newMessage != null;
+        String newMsg = newMessage.getText().toString();
+        if(newMsg.length() > 0 ) {
+            messageList.add(newMsg);
+            //this isnt working whyyyyy
+            newMessage.setText("");
+            messageRecyclerView.getAdapter().notifyDataSetChanged();
 
-        mMessageRecycler.getAdapter().notifyDataSetChanged();
+        }
+        else{
+            Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
+        }
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
@@ -83,7 +102,6 @@ public class MessageListActivity extends AppCompatActivity {
             }
         }
     }
-
 
     @Override
     public boolean onSupportNavigateUp() {
