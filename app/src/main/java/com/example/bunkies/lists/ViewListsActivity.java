@@ -1,4 +1,4 @@
-package com.example.bunkies;
+package com.example.bunkies.lists;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -10,8 +10,15 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
+
+import com.example.bunkies.R;
+import com.example.bunkies.lists.BunkiesList;
+import com.example.bunkies.lists.BunkiesListAdapter;
+import com.example.bunkies.lists.BunkiesListClickListener;
+import com.example.bunkies.lists.ListActivity;
+import com.example.bunkies.lists.ListItem;
+import com.example.bunkies.lists.NewListActivity;
 
 import java.io.File;
 import java.io.FileInputStream;

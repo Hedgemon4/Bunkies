@@ -62,28 +62,28 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".NewListActivity"
+            android:name=".lists.NewListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ViewListsActivity"
+            android:name=".lists.ViewListsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddListItem"
+            android:name=".lists.AddListItem"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ListActivity"
+            android:name=".lists.ListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
