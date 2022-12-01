@@ -2,6 +2,8 @@ package com.example.bunkies;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -25,6 +27,12 @@ public class EventEditActivity extends AppCompatActivity
         time = LocalTime.now();
         eventDateTV.setText("Date: " + CalendarUtils.formattedDate(CalendarUtils.selectedDate));
         eventTimeTV.setText("Time: " + CalendarUtils.formattedTime(time));
+
+        getSupportActionBar().setTitle("Calendar");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FF3700B3")));
+
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
     }
 
     private void initWidgets()
@@ -40,5 +48,11 @@ public class EventEditActivity extends AppCompatActivity
         Event newEvent = new Event(eventName, CalendarUtils.selectedDate, time);
         Event.eventsList.add(newEvent);
         finish();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

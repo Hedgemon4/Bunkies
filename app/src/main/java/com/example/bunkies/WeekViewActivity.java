@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -32,6 +34,12 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         setContentView(R.layout.activity_week_view);
         initWidgets();
         setWeekView();
+
+        getSupportActionBar().setTitle("Calendar");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FF3700B3")));
+
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
     }
 
     private void initWidgets()
@@ -95,5 +103,11 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     public void dailyAction(View view)
     {
         startActivity(new Intent(this, DailyCalendarActivity.class));
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }
