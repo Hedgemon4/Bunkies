@@ -11,6 +11,4 @@
         <item>Personal</item>
         <item>Household</item>
     </string-array>
-    <string name="back"><![CDATA[<-]]></string>
-    <string name="forward"><![CDATA[->]]></string>
 </resources>
