@@ -67,8 +67,9 @@
             setResult(Activity.RESULT_OK,intent);
             finish();
 
+        }else {
+            Toast.makeText(this, "Please select a person to add to the chat", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, "Please select a person to add to the chat", Toast.LENGTH_SHORT).show();
     }
 
     @Override
