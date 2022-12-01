@@ -7,31 +7,31 @@
     tools:context=".messaging.editChatActivity">
 
     <CheckBox
-        android:id="@+id/checkBox4"
+        android:id="@+id/TheoCheck"
         android:layout_width="242dp"
         android:layout_height="43dp"
         android:layout_marginStart="40dp"
         android:text="Theophania"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
+        app:layout_constraintTop_toBottomOf="@+id/guntCheck" />
 
     <CheckBox
-        android:id="@+id/checkBox3"
+        android:id="@+id/guntCheck"
         android:layout_width="242dp"
         android:layout_height="43dp"
         android:layout_marginStart="40dp"
         android:text="Günter"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+        app:layout_constraintTop_toBottomOf="@+id/EmilyCheckEdit" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/EmilyCheckEdit"
         android:layout_width="242dp"
         android:layout_height="43dp"
         android:layout_marginStart="40dp"
         android:text="Emily"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/ChadCheck" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/layoutEdit"
@@ -39,7 +39,9 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@color/negativeOrange"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/ChatSettings"
@@ -75,6 +77,7 @@
         android:layout_marginEnd="16dp"
         android:editable="true"
         android:text=""
+        android:maxLines="1"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -119,7 +122,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/ChadCheck"
         android:layout_width="242dp"
         android:layout_height="43dp"
         android:layout_marginStart="40dp"
