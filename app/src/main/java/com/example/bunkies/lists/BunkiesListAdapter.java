@@ -29,10 +29,12 @@ public class BunkiesListAdapter extends RecyclerView.Adapter<BunkiesListAdapter.
     @Override
     public void onBindViewHolder(@NonNull BunkiesListAdapter.MyViewHolder holder, int position) {
         String listName = bunkiesLists.get(position).getListName();
-
         holder.textView.setText(listName);
-        //holder.textView.setPaintFlags(holder.textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        holder.textView.setOnClickListener((text) -> bunkiesListClickListener.onTextClick(text, holder.getAdapterPosition()));
+        String text = "Members: ";
+        String members = String.join(", ",  bunkiesLists.get(position).getPeople());
+        text += members;
+        holder.memberView.setText(text);
+        holder.textView.setOnClickListener((i) -> bunkiesListClickListener.onTextClick(i, holder.getAdapterPosition()));
     }
 
     @Override
@@ -46,10 +48,12 @@ public class BunkiesListAdapter extends RecyclerView.Adapter<BunkiesListAdapter.
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView textView;
+        private final TextView memberView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.bunkiesListTextView);
+            memberView = itemView.findViewById(R.id.bunkiesListDisplayMembers);
             itemView.setOnClickListener(this);
         }
 
