@@ -76,6 +76,10 @@ public class messageListApdater extends RecyclerView.Adapter {
                 ((ReceivedMessageHolder) holder).bind(message);
         }
     }
+    public void addItem(int position, String message) {
+        mMessageList.add(position, message);
+        notifyItemInserted(position);
+    }
 
     private class SentMessageHolder extends RecyclerView.ViewHolder {
         TextView messageText, timeText,dateText;
@@ -96,10 +100,13 @@ public class messageListApdater extends RecyclerView.Adapter {
            // timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
             Date d = new Date();
              int j = d.getHours();
+             if(j>12){
+                 j=j-12;
+             }
             int k = d.getMinutes();
             String str = Integer.toString(j);
             String str1 = Integer.toString(k);
-            str = str+k+"pm";
+            str = str+":"+k+"pm";
 
             timeText.setText(str);
             dateText.setVisibility(View.GONE);
@@ -127,10 +134,13 @@ public class messageListApdater extends RecyclerView.Adapter {
             //timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
             Date d = new Date();
             int j = d.getHours();
+            if(j>12){
+                j=j-12;
+            }
             int k = d.getMinutes();
             String str = Integer.toString(j);
             String str1 = Integer.toString(k);
-            str = str+k+"pm";
+            str = str+":"+k+"pm";
 
             timeText.setText(str);
             dateText.setVisibility(View.GONE);

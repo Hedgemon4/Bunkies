@@ -2,6 +2,8 @@ package com.example.bunkies.messaging;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +27,9 @@ public class MessagingMainActivity extends AppCompatActivity {
 
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+
+        getSupportActionBar().setTitle("Messages");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable((Color.parseColor("#FFFF7036"))));
 
         rvContacts = (RecyclerView) findViewById(R.id.recycler_gchat);
         Button newChat = findViewById(R.id.Addbutton);
