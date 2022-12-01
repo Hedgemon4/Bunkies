@@ -70,6 +70,9 @@ public class ViewListsActivity extends AppCompatActivity implements BunkiesListC
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#e29f1d")));
     }
 
+    // Change to onItemClick listener
+    // TODO SEND email abut project steps
+
     @Override
     public void onTextClick(View view, int position) {
         try {
