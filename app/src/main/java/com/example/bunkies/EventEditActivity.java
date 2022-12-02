@@ -8,14 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.Time;
 import java.time.LocalTime;
 
-public class EventEditActivity extends AppCompatActivity
-{
+public class EventEditActivity extends AppCompatActivity {
     private EditText eventNameET;
-    private TextView eventDateTV, eventTimeTV;
+    private TextView eventDateTV;
 
     private LocalTime time;
 
@@ -23,14 +23,12 @@ public class EventEditActivity extends AppCompatActivity
     private EditText minutes;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_edit);
         initWidgets();
         time = LocalTime.now();
         eventDateTV.setText("Date: " + CalendarUtils.formattedDate(CalendarUtils.selectedDate));
-        eventTimeTV.setText("Time: " + CalendarUtils.formattedTime(time));
 
         hours = findViewById(R.id.editEventHours);
         minutes = findViewById(R.id.editEventMinutes);
@@ -42,19 +40,37 @@ public class EventEditActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
     }
 
-    private void initWidgets()
-    {
+    private void initWidgets() {
         eventNameET = findViewById(R.id.eventNameET);
         eventDateTV = findViewById(R.id.eventDateTV);
-        eventTimeTV = findViewById(R.id.eventTimeTV);
     }
 
-    public void saveEventAction(View view)
-    {
-        time = LocalTime.of(Integer.parseInt(hours.getText().toString()), Integer.parseInt(minutes.getText().toString()));
-        String eventName = eventNameET.getText().toString();
-        Event newEvent = new Event(eventName, CalendarUtils.selectedDate, time);
-        Event.eventsList.add(newEvent);
+    public void saveEventAction(View view) {
+        if (!eventNameET.getText().toString().equals("")) {
+            int hours = Integer.parseInt(this.hours.getText().toString());
+            int minutes = Integer.parseInt(this.minutes.getText().toString());
+            if (hours >= 0 && hours < 24) {
+                if (minutes >= 0 && minutes < 60) {
+                    time = LocalTime.of(hours, minutes);
+                    String eventName = eventNameET.getText().toString();
+                    Event newEvent = new Event(eventName, CalendarUtils.selectedDate, time);
+                    Event.eventsList.add(newEvent);
+                    finish();
+                } else {
+                    Toast.makeText(this, "You must enter a valid number of minutes (0 to 59)", Toast.LENGTH_SHORT).show();
+                    this.hours.setError("You must enter a valid number of minutes (0 to 59)");
+                }
+            } else {
+                Toast.makeText(this, "You must enter a valid number of hours (0 to 23)", Toast.LENGTH_SHORT).show();
+                this.hours.setError("You must enter a valid number of hours (0 to 23)");
+            }
+        } else {
+            Toast.makeText(this, "You must enter a name for your event.", Toast.LENGTH_SHORT).show();
+            eventNameET.setError("Your must enter a name for your event.");
+        }
+    }
+
+    public void onCancelClick(View view) {
         finish();
     }
 
