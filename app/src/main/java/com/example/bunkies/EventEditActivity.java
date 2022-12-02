@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import java.sql.Time;
 import java.time.LocalTime;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EventEditActivity extends AppCompatActivity {
     private EditText eventNameET;
@@ -47,10 +49,14 @@ public class EventEditActivity extends AppCompatActivity {
 
     public void saveEventAction(View view) {
         if (!eventNameET.getText().toString().equals("")) {
-            int hours = Integer.parseInt(this.hours.getText().toString());
-            int minutes = Integer.parseInt(this.minutes.getText().toString());
-            if (hours >= 0 && hours < 24) {
-                if (minutes >= 0 && minutes < 60) {
+            Pattern hoursPattern = Pattern.compile("([0-1]?[0-9])|([2][0-3])");
+            Matcher hoursMatcher = hoursPattern.matcher(this.hours.getText().toString());
+            Pattern minutesPattern = Pattern.compile("([0-5]?[0-9])");
+            Matcher minutesMatcher = minutesPattern.matcher(this.minutes.getText().toString());
+            if (hoursMatcher.matches()) {
+                int hours = Integer.parseInt(this.hours.getText().toString());
+                if (minutesMatcher.matches()) {
+                    int minutes = Integer.parseInt(this.minutes.getText().toString());
                     time = LocalTime.of(hours, minutes);
                     String eventName = eventNameET.getText().toString();
                     Event newEvent = new Event(eventName, CalendarUtils.selectedDate, time);
@@ -58,7 +64,7 @@ public class EventEditActivity extends AppCompatActivity {
                     finish();
                 } else {
                     Toast.makeText(this, "You must enter a valid number of minutes (0 to 59)", Toast.LENGTH_SHORT).show();
-                    this.hours.setError("You must enter a valid number of minutes (0 to 59)");
+                    this.minutes.setError("You must enter a valid number of minutes (0 to 59)");
                 }
             } else {
                 Toast.makeText(this, "You must enter a valid number of hours (0 to 23)", Toast.LENGTH_SHORT).show();
