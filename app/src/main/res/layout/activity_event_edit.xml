@@ -58,4 +58,18 @@
         android:text="Save"
         android:textColor="@color/white" />
 
+    <EditText
+        android:id="@+id/editEventHours"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editEventMinutes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
 </LinearLayout>
