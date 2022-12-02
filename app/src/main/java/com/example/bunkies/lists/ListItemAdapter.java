@@ -1,4 +1,4 @@
-package com.example.bunkies;
+package com.example.bunkies.lists;
 
 import android.graphics.Paint;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.bunkies.R;
 
 import java.util.ArrayList;
 

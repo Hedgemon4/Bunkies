@@ -10,7 +10,7 @@
         <item>Personal</item>
         <item>Household</item>
     </string-array>
-    <string name="addItem">Add List Item</string>
+    <string name="addItem">Add List Task</string>
     <string name="name">Name:</string>
     <string name="description">Description:</string>
     <string name="add_roomies">Add Roomies:</string>

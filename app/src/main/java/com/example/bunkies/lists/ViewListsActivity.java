@@ -1,4 +1,4 @@
-package com.example.bunkies;
+package com.example.bunkies.lists;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -12,6 +12,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+
+import com.example.bunkies.R;
+import com.example.bunkies.lists.BunkiesList;
+import com.example.bunkies.lists.BunkiesListAdapter;
+import com.example.bunkies.lists.BunkiesListClickListener;
+import com.example.bunkies.lists.ListActivity;
+import com.example.bunkies.lists.ListItem;
+import com.example.bunkies.lists.NewListActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -59,6 +67,9 @@ public class ViewListsActivity extends AppCompatActivity implements BunkiesListC
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#e29f1d")));
     }
 
+    // Change to onItemClick listener
+    // TODO SEND email abut project steps
+
     @Override
     public void onTextClick(View view, int position) {
         try {
@@ -85,6 +96,11 @@ public class ViewListsActivity extends AppCompatActivity implements BunkiesListC
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        this.onTextClick(view, position);
     }
 
     public void onNewListClick(View view) {

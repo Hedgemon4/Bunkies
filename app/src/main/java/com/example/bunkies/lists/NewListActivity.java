@@ -1,4 +1,4 @@
-package com.example.bunkies;
+package com.example.bunkies.lists;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.bunkies.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -47,11 +49,14 @@ public class NewListActivity extends AppCompatActivity {
     }
 
     public void onCancelClick(View view) {
+        Intent intent = new Intent(this, ViewListsActivity.class);
+        startActivity(intent);
         finish();
     }
 
     public void onCreateClick(View view) {
         if (listName.getText().toString().equals("")) {
+            listName.setError("Please enter a name for your list.");
             Toast.makeText(this, "You must fill in the name field to create a new list.", Toast.LENGTH_SHORT).show();
         } else {
             if (chadCheckbox.isChecked() || emilyCheckbox.isChecked() || gunterCheckbox.isChecked() || theoCheckbox.isChecked()) {

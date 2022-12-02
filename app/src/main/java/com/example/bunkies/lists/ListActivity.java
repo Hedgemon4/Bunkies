@@ -1,8 +1,7 @@
-package com.example.bunkies;
+package com.example.bunkies.lists;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,9 +9,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.bunkies.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,6 +30,8 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
     private EditText addTask;
     private ListItemAdapter listItemAdapter;
     private BunkiesList bunkiesList;
+    private TextView listName;
+    private TextView listMembers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +63,19 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
             return true;
         });
 
+        listName = findViewById(R.id.viewListListName);
+        listName.setText(bunkiesList.getListName());
+
+        String s = "Members: ";
+        String m = String.join(", ", bunkiesList.getPeople());
+        s += m;
+
+        listMembers = findViewById(R.id.listMembersTextView);
+        listMembers.setText(s);
+
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
-        getSupportActionBar().setTitle(bunkiesList.getListName());
+        getSupportActionBar().setTitle("Lists");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#e29f1d")));
     }
 
@@ -68,7 +83,7 @@ public class ListActivity extends AppCompatActivity implements ListClickListener
     public void onCheckClick(View view, int position) {
         boolean b = listItems.get(position).isDone();
         listItems.get(position).setDone(!b);
-        listItemAdapter.notifyDataSetChanged();
+        recyclerView.post(() -> listItemAdapter.notifyItemChanged(position));
         saveList();
     }
 
