@@ -62,7 +62,9 @@ public class newChatActivity extends AppCompatActivity {
             finish();
 
         }
-        Toast.makeText(this, "Please select a person to add to the chat", Toast.LENGTH_SHORT).show();
+        else {
+            Toast.makeText(this, "Please select a person to add to the chat", Toast.LENGTH_SHORT).show();
+        }
     }
     @Override
     public boolean onSupportNavigateUp() {
