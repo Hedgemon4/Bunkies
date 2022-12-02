@@ -36,12 +36,12 @@ public class messageListApdater extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
     String message = mMessageList.get(position);
 
-        if (position%2==0) {
+        if (position==1 || position == 3) {
             // If the current user is the sender of the message
-            return VIEW_TYPE_MESSAGE_SENT;
+            return VIEW_TYPE_MESSAGE_RECEIVED;
         } else {
             // If some other user sent the message
-            return VIEW_TYPE_MESSAGE_RECEIVED;
+            return VIEW_TYPE_MESSAGE_SENT;
         }
     }
 
