@@ -61,6 +61,8 @@ public class MessagingMainActivity extends AppCompatActivity {
             }
         }
     }
+
+
     @Override
     public boolean onSupportNavigateUp() {
         finish();

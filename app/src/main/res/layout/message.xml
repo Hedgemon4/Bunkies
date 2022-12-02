@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginEnd="8dp"
-    android:layout_marginTop="16dp">
+    android:layout_marginTop="16dp"
+    android:paddingRight="8dp">
 
     <TextView
         android:id="@+id/text_gchat_date_me"
@@ -39,7 +40,8 @@
             android:id="@+id/layout_gchat_container_me"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingRight="8dp">
 
             <TextView
                 android:id="@+id/text_gchat_message_me"
@@ -49,7 +51,7 @@
                 android:maxWidth="260dp"
                 android:paddingLeft="12dp"
                 android:paddingTop="8dp"
-                android:paddingRight="12dp"
+                android:paddingRight="8dp"
                 android:text="This is a Message"
                 android:textColor="#ffffff"
                 android:textSize="16sp" />
