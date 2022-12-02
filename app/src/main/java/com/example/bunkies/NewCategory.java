@@ -3,9 +3,12 @@ package com.example.bunkies;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,8 @@ public class NewCategory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_category);
 
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FF06B600")));
+
         int index = getIntent().getIntExtra("pos", 0);
         editIndex = getIntent().getIntExtra("editIndex", -1);
 
@@ -35,26 +40,39 @@ public class NewCategory extends AppCompatActivity {
 
         final Button addButton = findViewById(R.id.addCategory);
         addButton.setOnClickListener(v -> {
-            ArrayList<Budget> budgets = MainActivity.loadBudgets(getApplicationContext());
+            if (!nameInput.getText().toString().equals("")) {
+                if (!goalInput.getText().toString().equals("")) {
+                    ArrayList<Budget> budgets = MainActivity.loadBudgets(getApplicationContext());
 
-            String newName = nameInput.getText().toString();
-            double newGoal = Double.parseDouble(goalInput.getText().toString());
-            String newDesc = descInput.getText().toString();
-            List<Transaction> newTransactions = new ArrayList<Transaction>();
+                    String newName = nameInput.getText().toString();
+                    double newGoal = Double.parseDouble(goalInput.getText().toString());
+                    String newDesc = descInput.getText().toString();
+                    List<Transaction> newTransactions = new ArrayList<Transaction>();
 
 
-            if (editIndex == -1) {
-                BudgetCategory newCategory = new BudgetCategory(newGoal, newName, newDesc, newTransactions);
-                budgets.get(index).categories.add(newCategory);
+                    if (editIndex == -1) {
+                        BudgetCategory newCategory = new BudgetCategory(newGoal, newName, newDesc, newTransactions);
+                        budgets.get(index).categories.add(newCategory);
+                    } else {
+                        newTransactions = budgets.get(index).categories.get(editIndex).transactions;
+                        BudgetCategory newCategory = new BudgetCategory(newGoal, newName, newDesc, newTransactions);
+                        budgets.get(index).categories.set(editIndex, newCategory);
+                    }
+
+                    MainActivity.saveBudgets(budgets, getApplicationContext());
+
+                    finish();
+
+                } else {
+                    Toast.makeText(this, "You must enter a spending goal.", Toast.LENGTH_SHORT).show();
+                    goalInput.setError("Please enter a spending goal.");
+                }
+
             } else {
-                newTransactions = budgets.get(index).categories.get(editIndex).transactions;
-                BudgetCategory newCategory = new BudgetCategory(newGoal, newName, newDesc, newTransactions);
-                budgets.get(index).categories.set(editIndex, newCategory);
+                Toast.makeText(this, "You must enter a name for your category.", Toast.LENGTH_SHORT).show();
+                nameInput.setError("Please enter a name for your category.");
             }
 
-            MainActivity.saveBudgets(budgets, getApplicationContext());
-
-            finish();
         });
 
         final Button cancelButton = findViewById(R.id.cancelCategory);

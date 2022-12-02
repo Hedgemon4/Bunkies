@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+
+import com.example.bunkies.messaging.MessagingMainActivity;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -109,10 +112,20 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     @Override
     public boolean onSupportNavigateUp() {
         finish();
         return true;
+    }
+
+    public void onListClick(View view) {
+        Intent intent = new Intent(this, ViewListsActivity.class);
+        startActivity(intent);
+    }
+
+    public void messageClick(View v){
+        Intent messaging = new Intent(MainActivity.this, MessagingMainActivity.class);
+        startActivity(messaging);
+
     }
 }

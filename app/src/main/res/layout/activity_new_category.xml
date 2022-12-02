@@ -8,9 +8,9 @@
 
     <Button
         android:id="@+id/cancelCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
+        android:layout_width="174dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="268dp"
         android:backgroundTint="@color/negativeOrange"
         android:text="Cancel"
@@ -19,9 +19,9 @@
 
     <Button
         android:id="@+id/addCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="92dp"
+        android:layout_width="174dp"
+        android:layout_height="53dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="268dp"
         android:backgroundTint="@color/budgetGreen"
         android:text="Add"

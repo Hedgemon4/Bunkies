@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="roomies">
+        <item>Chad</item>
+        <item>Emily</item>
+        <item>Günter</item>
+        <item>Theophania</item>
+    </string-array>
+</resources>
