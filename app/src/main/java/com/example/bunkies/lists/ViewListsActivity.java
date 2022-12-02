@@ -34,10 +34,6 @@ public class ViewListsActivity extends AppCompatActivity implements BunkiesListC
     private RecyclerView recyclerView;
     private BunkiesListAdapter bunkiesListAdapter;
 
-    // TODO: Make list overview clear and add another page title
-    // TODO: Add way to view who is in a budget
-    // TODO: Fix button and text size
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
