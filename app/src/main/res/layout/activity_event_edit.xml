@@ -39,14 +39,43 @@
 
     <TextView
         android:id="@+id/eventTimeTV"
-        android:layout_width="wrap_content"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="Current Time"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="195dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Time"
-        android:textSize="20sp"
+        android:text="Enter time:"
         android:textAlignment="center"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/editEventHours"
+        android:layout_width="198dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:inputType="textPersonName"
+        android:text="Hour" />
+
+    <EditText
+        android:id="@+id/editEventMinutes"
+        android:layout_width="198dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:inputType="textPersonName"
+        android:text="Minute" />
 
     <Button
         android:layout_width="wrap_content"
@@ -58,18 +87,5 @@
         android:text="Save"
         android:textColor="@color/white" />
 
-    <EditText
-        android:id="@+id/editEventHours"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/editEventMinutes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
 
 </LinearLayout>
