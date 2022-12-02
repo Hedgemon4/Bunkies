@@ -8,23 +8,23 @@
 
     <Button
         android:id="@+id/addTransaction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="88dp"
+        android:layout_width="166dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/budgetGreen"
         android:text="Add"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cancelTransaction"
         app:layout_constraintTop_toBottomOf="@+id/newTransactionDate" />
 
     <Button
         android:id="@+id/cancelTransaction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="18dp"
+        android:layout_width="175dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/negativeOrange"
         android:text="Cancel"
+        app:layout_constraintEnd_toStartOf="@+id/addTransaction"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newTransactionDate" />
 
@@ -96,7 +96,7 @@
         android:layout_marginStart="3dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Date of transaction"
+        android:hint="mm-dd-yyyy"
         android:inputType="text"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/amountInput" />

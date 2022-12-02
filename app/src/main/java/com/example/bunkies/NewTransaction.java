@@ -2,9 +2,12 @@ package com.example.bunkies;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,8 @@ public class NewTransaction extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_transaction);
 
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FF06B600")));
+
         editIndex = getIntent().getIntExtra("editIndex", -1);
 
         assert getSupportActionBar() != null;   //null check
@@ -35,6 +40,8 @@ public class NewTransaction extends AppCompatActivity {
 
         final Button addButton = findViewById(R.id.addTransaction);
         addButton.setOnClickListener(v -> {
+            if (!nameInput.getText().toString().equals("")) {
+                if (!amountInput.getText().toString().equals("")) {
             ArrayList<Budget> budgets = MainActivity.loadBudgets(getApplicationContext());
 
             String newName = nameInput.getText().toString();
@@ -51,6 +58,16 @@ public class NewTransaction extends AppCompatActivity {
             MainActivity.saveBudgets(budgets, getApplicationContext());
 
             finish();
+
+                } else {
+                    Toast.makeText(this, "You must enter an amount.", Toast.LENGTH_SHORT).show();
+                    amountInput.setError("Please enter a an amount spent.");
+                }
+
+            } else {
+                Toast.makeText(this, "You must enter a name for your transaction.", Toast.LENGTH_SHORT).show();
+                nameInput.setError("Please enter a name for your transaction.");
+            }
         });
 
         final Button cancelButton = findViewById(R.id.cancelTransaction);

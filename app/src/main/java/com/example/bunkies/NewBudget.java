@@ -3,10 +3,13 @@ package com.example.bunkies;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,8 @@ public class NewBudget extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_budget);
 
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FF06B600")));
+
         gunterBox = findViewById(R.id.gunterBox);
         chadBox = findViewById(R.id.chadBox);
         theophaniaBox = findViewById(R.id.theophaniaBox);
@@ -40,29 +45,36 @@ public class NewBudget extends AppCompatActivity {
 
         final Button addButton = findViewById(R.id.addButton);
         addButton.setOnClickListener(v -> {
-            ArrayList<Budget> budgets = MainActivity.loadBudgets(getApplicationContext());
+            if (!nameInput.getText().toString().equals("")) {
+                ArrayList<Budget> budgets = MainActivity.loadBudgets(getApplicationContext());
 
-            String newName = nameInput.getText().toString();
-            String newDesc = descInput.getText().toString();
-            List<BudgetCategory> newCategories = new ArrayList<BudgetCategory>();
-            RoomieValues newRoomies = new RoomieValues();
+                String newName = nameInput.getText().toString();
+                String newDesc = descInput.getText().toString();
+                List<BudgetCategory> newCategories = new ArrayList<BudgetCategory>();
+                RoomieValues newRoomies = new RoomieValues();
 
-            newRoomies.gunter = gunterBox.isChecked();
-            newRoomies.chad = chadBox.isChecked();
-            newRoomies.theophania = theophaniaBox.isChecked();
+                newRoomies.gunter = gunterBox.isChecked();
+                newRoomies.chad = chadBox.isChecked();
+                newRoomies.theophania = theophaniaBox.isChecked();
 
-            if (editIndex == -1) {
-                Budget newBudget = new Budget(newName, newDesc, newCategories, newRoomies);
-                budgets.add(newBudget);
+                if (editIndex == -1) {
+                    Budget newBudget = new Budget(newName, newDesc, newCategories, newRoomies);
+                    budgets.add(newBudget);
+                } else {
+                    newCategories = budgets.get(editIndex).categories;
+                    Budget newBudget = new Budget(newName, newDesc, newCategories, newRoomies);
+                    budgets.set(editIndex, newBudget);
+                }
+                MainActivity.saveBudgets(budgets, getApplicationContext());
+
+                finish();
+
             } else {
-                newCategories = budgets.get(editIndex).categories;
-                Budget newBudget = new Budget(newName, newDesc, newCategories, newRoomies);
-                budgets.set(editIndex, newBudget);
+                Toast.makeText(this, "You must enter a name for your budget.", Toast.LENGTH_SHORT).show();
+                nameInput.setError("Please enter a name for your budget.");
             }
-            MainActivity.saveBudgets(budgets, getApplicationContext());
-
-            finish();
         });
+
 
         final Button cancelButton = findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(v -> {
