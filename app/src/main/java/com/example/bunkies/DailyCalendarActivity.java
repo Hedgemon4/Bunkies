@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -30,6 +32,12 @@ public class DailyCalendarActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_calendar);
         initWidgets();
+
+        getSupportActionBar().setTitle("Calendar");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FF3700B3")));
+
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
     }
 
     private void initWidgets()
@@ -90,5 +98,11 @@ public class DailyCalendarActivity extends AppCompatActivity
     public void newEventAction(View view)
     {
         startActivity(new Intent(this, EventEditActivity.class));
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }
